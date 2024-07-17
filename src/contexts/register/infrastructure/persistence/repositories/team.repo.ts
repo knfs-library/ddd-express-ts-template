@@ -1,6 +1,6 @@
 import { Team as TeamORM } from '../../../../../shared/infrastructure/persistence/ORMs/Team';
 import { MemberTeamAssoc } from '../../../../../shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
-import { Repository } from '../../../../../shared/infrastructure/repository.abs';
+import { Repository } from '../../../../../shared/infrastructure/persistence/repository.abs';
 
 import sequelize from '../../../../../shared/kernel/database';
 import Factory from '../../../domain/factory';

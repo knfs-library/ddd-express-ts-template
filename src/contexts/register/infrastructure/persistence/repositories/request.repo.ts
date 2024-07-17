@@ -1,4 +1,4 @@
-import { Repository } from '../../../../../shared/infrastructure/repository.abs';
+import { Repository } from '../../../../../shared/infrastructure/persistence/repository.abs';
 
 import sequelize from '../../../../../shared/kernel/database';
 import Factory from '../../../domain/factory';
