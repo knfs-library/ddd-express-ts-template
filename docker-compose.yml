@@ -1,0 +1,26 @@
+version: "3.4"
+services:
+  db:
+    image: mysql:8
+    platform: linux/amd64
+    volumes:
+      - ddd-db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_DATABASE: ${DB_DATABASE}
+    ports:
+      - 3306:3306
+    networks:
+      - ddd_network
+      
+networks:
+  ddd_network:
+    driver: "bridge"
+
+volumes:
+  ddd-db-data:
+
+
+
