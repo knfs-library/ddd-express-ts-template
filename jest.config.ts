@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import { resolve } from 'path';
 
 require('dotenv').config({ path: '.env.test' });
 export default {

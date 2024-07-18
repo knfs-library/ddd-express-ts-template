@@ -1,5 +1,3 @@
-import { UUID, randomUUID } from "crypto";
-
 import { Register } from "./entities/Register";
 import { Admin } from "./entities/Admin"
 import { Request } from "./entities/Request";
@@ -8,53 +6,113 @@ import Address from "./value-objects/Address";
 
 import FactoryInterface from "../../../shared/domain/factory.itf";
 
-class Factory implements FactoryInterface {
-	static initRegister(
-		id: UUID | null = null,
-		firstName: string,
-		lastName: string,
-		birthday: Date,
-		address: Address
-	) {
-		if (null === id) {
-			id = randomUUID()
-		}
-		return new Register(id, firstName, lastName, birthday, address)
+import { User } from "../../../shared/infrastructure/persistence/ORMs/User";
+import { Team as TeamORM } from "../../../shared/infrastructure/persistence/ORMs/Team";
+import { Request as RequestORM } from "../../../shared/infrastructure/persistence/ORMs/Request";
+
+import { RegisterAggregate, TeamAggregate, RequestAggregate } from "./entities/aggregate";
+import { RequestState, RequestStateCode, RequestStateString } from "./value-objects/RequestState";
+
+export class Factory implements FactoryInterface {
+	static initRegister(data: User): Register {
+		const address = new Address(
+			data.profile.address.address,
+			data.profile.address.ward,
+			data.profile.address.district,
+			data.profile.address.city,
+			data.profile.address.country,
+		)
+		return new Register(
+			data.id,
+			data.profile.firstName,
+			data.profile.lastName, data.profile.birthday,
+			address.toString()
+		)
 	}
 
-	static initAdmin(
-		id: UUID | null = null,
-		firstName: string,
-		lastName: string,
-	) {
-		if (null === id) {
-			id = randomUUID()
-		}
-		return new Admin(id, firstName, lastName)
+	static initRegisterAggregate(data: User): RegisterAggregate {
+		const address = new Address(
+			data.profile.address.address,
+			data.profile.address.ward,
+			data.profile.address.district,
+			data.profile.address.city,
+			data.profile.address.country,
+		)
+
+		return new RegisterAggregate(
+			data.id,
+			data.profile.firstName,
+			data.profile.lastName,
+			data.profile.birthday,
+			address
+		)
 	}
 
-	static initTeam(
-		id: UUID | null = null,
-		admin: Admin,
-		name: string, 
-		memberCount: number,
-		description: string | null
-	) {
-		if (null === id) {
-			id = randomUUID()
-		}
-		return new Team(id, name, admin, memberCount, description)
+	static initAdmin(data: User): Admin {
+		return new Admin(
+			data.id,
+			data.profile.firstName,
+			data.profile.lastName,)
 	}
 
-	static initRequest(
-		id: UUID | null = null,
-		register: Register,
-		team: Team
-	) {
-		if (null === id) {
-			id = randomUUID()
+	static initTeam(data: TeamORM, memberCount: number) {
+		return new Team(
+			data.id,
+			data.admin.id,
+			data.name,
+			memberCount,
+			data.description
+		)
+	}
+
+	static initTeamAggregate(data: TeamORM, memberCount: number) {
+		const admin = new Admin(
+			data.admin.id,
+			data.admin.profile.firstName,
+			data.admin.profile.lastName
+		)
+		return new TeamAggregate(
+			data.id,
+			admin,
+			data.name,
+			memberCount,
+			data.description
+		)
+	}
+
+	static initRequest(data: RequestORM) {
+		return new Request(
+			data.id,
+			data.registerId,
+			data.teamId,
+			data.state
+		)
+	}
+
+	static initRequestAggregate(data: RequestORM, memberCount: number) {
+		const register = Factory.initRegisterAggregate(
+			data.register
+		)
+		const team = Factory.initTeamAggregate(
+			data.team,
+			memberCount
+		)
+		let state: RequestState | null = null
+		switch (data.state) {
+			case (RequestStateCode.Pending):
+				state = new RequestState(RequestStateCode.Pending, RequestStateString.Pending)
+				break
+			case (RequestStateCode.Approved):
+				state = new RequestState(RequestStateCode.Approved, RequestStateString.Approved)
+				break;
 		}
-		return new Request(id, register, team)
+
+		return new RequestAggregate(
+			data.id,
+			register,
+			team,
+			state
+		)
 	}
 
 	static initAddress(
@@ -67,5 +125,3 @@ class Factory implements FactoryInterface {
 		return new Address(address, warn, district, city, country)
 	}
 }
-
-export default Factory

@@ -2,7 +2,7 @@ import { User } from '../../../../../shared/infrastructure/persistence/ORMs/User
 import { Repository } from '../../../../../shared/infrastructure/persistence/repository.abs';
 
 import sequelize from '../../../../../shared/kernel/database';
-import Factory from '../../../domain/factory';
+import { Factory } from '../../../domain/factory';
 import { UUID } from 'crypto';
 import { Register } from '../../../domain/entities/Register';
 
@@ -25,21 +25,7 @@ class RegisterRepository extends Repository<User> {
 		if (null === register) {
 			return null
 		}
-		const address = this._factory.initAddress(
-			register.profile.address.address,
-			register.profile.address.ward,
-			register.profile.address.district,
-			register.profile.address.city,
-			register.profile.address.country,
-		)
-
-		return this._factory.initRegister(
-			register.id,
-			register.profile.firstName,
-			register.profile.lastName,
-			register.profile.birthday,
-			address,
-		)
+		return this._factory.initRegisterAggregate(register)
 	}
 }
 

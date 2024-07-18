@@ -3,7 +3,7 @@ import { MemberTeamAssoc } from '../../../../../shared/infrastructure/persistenc
 import { Repository } from '../../../../../shared/infrastructure/persistence/repository.abs';
 
 import sequelize from '../../../../../shared/kernel/database';
-import Factory from '../../../domain/factory';
+import { Factory } from '../../../domain/factory';
 import { UUID } from 'crypto';
 import { Team } from '../../../domain/entities/Team';
 
@@ -33,18 +33,8 @@ class TeamRepository extends Repository<TeamORM> {
 			}
 		});
 
-		const admin = this._factory.initAdmin(
-			team.admin.id,
-			team.admin.profile?.firstName ?? '',
-			team.admin.profile?.lastName ?? ''
-		);
-
-		return this._factory.initTeam(
-			team.id,
-			admin,
-			team.name,
-			memberCount,
-			team.description ?? ''
+		return this._factory.initTeamAggregate(
+			team, memberCount
 		);
 	}
 }

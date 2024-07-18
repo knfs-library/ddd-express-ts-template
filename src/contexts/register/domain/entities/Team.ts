@@ -1,6 +1,5 @@
 import { UUID } from "crypto";
 
-import { Admin } from "./Admin";
 import { Entity, EntityDTO } from "../../../../shared/domain/entity.abs";
 
 export interface TeamDTO extends EntityDTO {
@@ -11,20 +10,20 @@ export interface TeamDTO extends EntityDTO {
 }
 
 export class Team extends Entity<TeamDTO> {
-	public admin: Admin
+	public adminId: UUID
 	public name: string
 	public memberCount: number = 1
-	public description: string | null
+	public description: string | null | undefined
 
 	constructor(
 		id: UUID,
+		adminId: UUID,
 		name: string,
-		admin: Admin,
 		memberCount: number,
-		description: string | null = ''
+		description: string | null | undefined
 	) {
 		super(id);
-		this.admin = admin
+		this.adminId = adminId
 		this.name = name
 		this.memberCount = memberCount
 		this.description = description
@@ -34,9 +33,9 @@ export class Team extends Entity<TeamDTO> {
 		return {
 			id: this.id,
 			name: this.name,
-			adminId: this.admin.id,
+			adminId: this.adminId,
 			memberCount: this.memberCount,
-			description: this.description
+			description: this.description ?? ''
 		}
 	}
 }

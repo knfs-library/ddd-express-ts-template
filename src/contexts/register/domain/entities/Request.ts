@@ -8,9 +8,6 @@ import {
 	RegisterRequestedJoinTeamEvent,
 	RegisterRequestedJoinTeamMessage,
 } from "../events/RegisterRequestedJoinTeam.event";
-import { RequestState, RequestStateCode, RequestStateString } from "../value-objects/RequestState";
-import { Team } from "./Team";
-import { Register } from "./Register";
 import { Entity, EntityDTO } from "../../../../shared/domain/entity.abs";
 
 export interface RequestDTO extends EntityDTO {
@@ -31,36 +28,28 @@ export class Request extends Entity<RequestDTO> {
 		}
 	}
 
-	public register: Register
-	public team: Team
-	public state: RequestState
+	public registerId: UUID
+	public teamId: UUID
+	public state: number
 
 	constructor(
 		id: UUID,
-		register: Register,
-		team: Team,
+		registerId: UUID,
+		teamId: UUID,
+		state: number
 	) {
 		super(id);
-		this.register = register
-		this.team = team
-		this.state = new RequestState(RequestStateCode.Pending, RequestStateString.Pending)
-	}
-
-	approved(adminId: UUID): boolean {
-		if (adminId === this.team.admin.id) {
-			this.state = new RequestState(RequestStateCode.Approved, RequestStateString.Approved)
-			return true
-		} else {
-			return false
-		}
+		this.registerId = registerId
+		this.teamId = teamId
+		this.state = state
 	}
 
 	dto() {
 		return {
 			id: this.id,
-			registerId: this.register.id,
-			teamId: this.team.id,
-			state: this.state.getStateCode()
+			registerId: this.registerId,
+			teamId: this.teamId,
+			state: this.state
 		}
 	}
 }

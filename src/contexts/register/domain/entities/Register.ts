@@ -14,14 +14,14 @@ export class Register extends Entity<RegisterDTO> {
 	public firstName: string
 	public lastName: string
 	public birthday: Date
-	public address: Address
+	public address: string
 
 	constructor(
 		id: UUID,
 		firstName: string,
 		lastName: string,
 		birthday: Date,
-		address: Address
+		address: string,
 	) {
 		super(id);
 		this.firstName = firstName
@@ -33,7 +33,7 @@ export class Register extends Entity<RegisterDTO> {
 	dto() {
 		return {
 			...this,
-			address: this.address.toString()
+			address: this.address
 		}
 	}
 }

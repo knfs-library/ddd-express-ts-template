@@ -1,7 +1,7 @@
 import { Repository } from '../../../../../shared/infrastructure/persistence/repository.abs';
 
 import sequelize from '../../../../../shared/kernel/database';
-import Factory from '../../../domain/factory';
+import { Factory } from '../../../domain/factory';
 import { Request as RequestORM } from '../../../../../shared/infrastructure/persistence/ORMs/Request';
 import { Team } from '../../../domain/entities/Team';
 import { Register } from '../../../domain/entities/Register';
@@ -27,6 +27,9 @@ class RequestRepository extends Repository<RequestORM> {
 					}],
 				}, {
 					association: 'team',
+					attributes: [
+
+					],
 					include: [
 						{
 							association: 'admin',
@@ -42,47 +45,13 @@ class RequestRepository extends Repository<RequestORM> {
 		if (null === request) {
 			return null
 		}
-
-		const address = this._factory.initAddress(
-			request.register.profile.address.address,
-			request.register.profile.address.ward,
-			request.register.profile.address.district,
-			request.register.profile.address.city,
-			request.register.profile.address.country,
-		)
-		const register = this._factory.initRegister(
-			request.register.id,
-			request.register.profile.firstName,
-			request.register.profile.lastName,
-			request.register.profile.birthday,
-			address,
-		)
-
-		const admin = this._factory.initAdmin(
-			request.team.admin.id,
-			request.team.admin.profile?.firstName ?? '',
-			request.team.admin.profile?.lastName ?? ''
-		);
-
 		const memberCount = await sequelize.getRepository(MemberTeamAssoc).count({
 			where: {
 				teamId: request.team.id
 			}
 		});
 
-		const team = this._factory.initTeam(
-			request.team.id,
-			admin,
-			request.team.name,
-			memberCount,
-			request.team.description ?? ''
-		);
-
-		return this._factory.initRequest(
-			id,
-			register,
-			team,
-		)
+		return this._factory.initRequestAggregate(request, memberCount)
 	}
 	async create(register: Register, team: Team): Promise<Request | boolean> {
 		const created = await this._accentor.create({
@@ -94,11 +63,7 @@ class RequestRepository extends Repository<RequestORM> {
 			return false
 		}
 
-		return this._factory.initRequest(
-			created.id,
-			register,
-			team
-		)
+		return this._factory.initRequest(created)
 	}
 	async updateState(request: Request): Promise<[number]> {
 		return await this._accentor.update({

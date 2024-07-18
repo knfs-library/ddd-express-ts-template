@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node ./src/index.ts",
-    "test": "jest --runInBand --force-exit --detectOpenHandles",
+    "test": "npx jest --runInBand --force-exit --detectOpenHandles",
     "migration:create": "npx sequelize-cli migration:generate",
     "migration:up": "npx sequelize-cli db:migrate",
     "migration:undo": "npx sequelize-cli db:migrate:undo",
