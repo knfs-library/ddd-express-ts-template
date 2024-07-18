@@ -19,3 +19,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
+Explanation of Sections:
+
+- **Introduction:** A brief introduction to the project and the purpose of using DDD.
+- **Directory Structure:** Description of the project's directory structure.
+- **Installation:** Instructions for installing the project.
+- **Running the Project:** Instructions for starting and testing the project.
+- **Usage:** Instructions on how to use the main APIs of the project.
+- **Contribution:** Instructions on how to contribute to the project.
+- **License:** The license type for the project.
+

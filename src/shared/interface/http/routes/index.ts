@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import registerRoutes from './../../../../contexts/register/infrastructure/http/routes/register.routes'
+import registerRoutes from '../../../../contexts/register/interfaces/http/routes/register.routes'
 
 const router = Router();
 

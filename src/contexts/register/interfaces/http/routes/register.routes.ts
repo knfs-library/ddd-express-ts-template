@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerToTeam, approveRegisterToTeam } from '../../../application/controllers/register.controller'
+import { registerToTeam, approveRegisterToTeam } from '../../controllers/register.controller'
 
 const router = Router();
 

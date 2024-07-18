@@ -5,13 +5,13 @@ import { Repository } from '../../../../../shared/infrastructure/persistence/rep
 import sequelize from '../../../../../shared/kernel/database';
 import { Factory } from '../../../domain/factory';
 import { UUID } from 'crypto';
-import { Team } from '../../../domain/entities/Team';
-
-class TeamRepository extends Repository<TeamORM> {
+import ITeamRepository from '../../../domain/repositories/team.repo.itf';
+import { TeamAggregate } from '../../../domain/aggregate';
+class TeamRepository extends Repository<TeamORM> implements ITeamRepository {
 	protected _accentor = sequelize.getRepository(TeamORM);
 	protected _factory = Factory;
 
-	async findById(id: UUID): Promise<Team | null> {
+	async findById(id: UUID): Promise<TeamAggregate | null> {
 		const team = await this._accentor.findByPk(id, {
 			include: [
 				{

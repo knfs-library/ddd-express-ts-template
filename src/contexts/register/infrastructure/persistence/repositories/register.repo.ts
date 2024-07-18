@@ -4,13 +4,13 @@ import { Repository } from '../../../../../shared/infrastructure/persistence/rep
 import sequelize from '../../../../../shared/kernel/database';
 import { Factory } from '../../../domain/factory';
 import { UUID } from 'crypto';
-import { Register } from '../../../domain/entities/Register';
-
-class RegisterRepository extends Repository<User> {
+import { RegisterAggregate } from '../../../domain/aggregate';
+import IRegisterRepository from '../../../domain/repositories/register.repo.itf';
+class RegisterRepository extends Repository<User> implements IRegisterRepository {
 	protected _accentor = sequelize.getRepository(User)
 	protected _factory = Factory;
 
-	async findById(id: UUID): Promise<Register | null> {
+	async findById(id: UUID): Promise<RegisterAggregate | null> {
 		const register = await this._accentor.findByPk(id,{
 			include: [
 				{

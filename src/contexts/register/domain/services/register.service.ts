@@ -1,16 +1,15 @@
 import { UUID } from "crypto";
-import RegisterRepository from "../../infrastructure/persistence/repositories/register.repo";
-import TeamRepository from "../../infrastructure/persistence/repositories/team.repo";
-import RequestRepository from "../../infrastructure/persistence/repositories/request.repo";
 import { Team } from "../entities/Team";
 import { Register } from "../entities/Register";
 import { Request } from "../entities/Request";
-
+import IRegisterRepository from "../repositories/register.repo.itf";
+import IRequestRepository from "../repositories/request.repo.itf";
+import ITeamRepository from "../repositories/team.repo.itf";
 export default class RegisterService {
 	constructor(
-		private readonly registerRepository: RegisterRepository,
-		private readonly teamRepository: TeamRepository,
-		private readonly requestRepository: RequestRepository
+		private readonly registerRepository: IRegisterRepository,
+		private readonly teamRepository: ITeamRepository,
+		private readonly requestRepository: IRequestRepository
 	) {
 	}
 

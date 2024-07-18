@@ -7,14 +7,14 @@ import { Team } from '../../../domain/entities/Team';
 import { Register } from '../../../domain/entities/Register';
 import { Request } from '../../../domain/entities/Request';
 import { MemberTeamAssoc } from '../../../../../shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
-
 import { UUID } from 'crypto';
-
-class RequestRepository extends Repository<RequestORM> {
+import IRequestRepository from '../../../domain/repositories/request.repo.itf';
+import { RequestAggregate } from '../../../domain/aggregate';
+class RequestRepository extends Repository<RequestORM> implements IRequestRepository {
 	protected _accentor = sequelize.getRepository(RequestORM)
 	protected _factory = Factory;
 
-	async findById(id: UUID): Promise<Request | null> {
+	async findById(id: UUID): Promise<RequestAggregate | null> {
 		const request = await this._accentor.findByPk(id, {
 			include: [
 				{

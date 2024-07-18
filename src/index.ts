@@ -12,7 +12,6 @@ const bootstrap = async () => {
 		}).catch(err => {
 			console.error('Error synchronizing database:', err);
 		});
-		// Initialize users or other models here if needed
 
 		app.listen(PORT, () => {
 			console.log(`Server is running on port ${PORT}`);

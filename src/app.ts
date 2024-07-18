@@ -1,5 +1,5 @@
 import express from 'express';
-import routes from './shared/infrastructure/http/routes'
+import routes from './shared/interface/http/routes'
 
 const app = express();
 

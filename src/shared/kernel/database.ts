@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import config from '../infrastructure/configs/database/database.config'
+import config from '../configs/database/database.config'
 
 let sequelize: Sequelize;
 if (config.environment === 'test') {

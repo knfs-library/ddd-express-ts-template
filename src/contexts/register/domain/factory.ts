@@ -10,7 +10,7 @@ import { User } from "../../../shared/infrastructure/persistence/ORMs/User";
 import { Team as TeamORM } from "../../../shared/infrastructure/persistence/ORMs/Team";
 import { Request as RequestORM } from "../../../shared/infrastructure/persistence/ORMs/Request";
 
-import { RegisterAggregate, TeamAggregate, RequestAggregate } from "./entities/aggregate";
+import { RegisterAggregate, TeamAggregate, RequestAggregate } from "./aggregate";
 import { RequestState, RequestStateCode, RequestStateString } from "./value-objects/RequestState";
 
 export class Factory implements FactoryInterface {

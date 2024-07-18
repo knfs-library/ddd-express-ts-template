@@ -1,9 +1,9 @@
-import { Request } from "./Request";
-import { Team } from "./Team";
-import { Register } from "./Register";
-import { Admin } from "./Admin";
-import Address from "../value-objects/Address";
-import { RequestState, RequestStateCode, RequestStateString } from "../value-objects/RequestState";
+import { Request } from "./entities/Request";
+import { Team } from "./entities/Team";
+import { Register } from "./entities/Register";
+import { Admin } from "./entities/Admin";
+import Address from "./value-objects/Address";
+import { RequestState, RequestStateCode, RequestStateString } from "./value-objects/RequestState";
 
 import { UUID } from "crypto";
 
