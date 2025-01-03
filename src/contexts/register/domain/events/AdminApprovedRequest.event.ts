@@ -1,4 +1,4 @@
-import { Event, EventMessage } from "../../../../shared/domain/event.abs";
+import { Event, EventMessage } from "@/shared/domain/event.abs";
 import { notifyApprovedRequestJoinTeam } from "../../application/listeners/notifyToRegister.listeners";
 
 export class AdminApproveRequestMessage extends EventMessage<Object> {

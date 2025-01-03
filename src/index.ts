@@ -1,4 +1,4 @@
-import sequelize from './shared/kernel/database';
+import sequelize from '@/shared/kernel/database';
 
 import app from './app' 
 const PORT = process.env.PORT || 3000;

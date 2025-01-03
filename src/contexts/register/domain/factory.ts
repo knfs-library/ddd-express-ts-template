@@ -4,11 +4,11 @@ import { Request } from "./entities/Request";
 import { Team } from "./entities/Team";
 import Address from "./value-objects/Address";
 
-import FactoryInterface from "../../../shared/domain/factory.itf";
+import FactoryInterface from "@/shared/domain/factory.itf";
 
-import { User } from "../../../shared/infrastructure/persistence/ORMs/User";
-import { Team as TeamORM } from "../../../shared/infrastructure/persistence/ORMs/Team";
-import { Request as RequestORM } from "../../../shared/infrastructure/persistence/ORMs/Request";
+import { User } from "@/shared/infrastructure/persistence/ORMs/User";
+import { Team as TeamORM } from "@/shared/infrastructure/persistence/ORMs/Team";
+import { Request as RequestORM } from "@/shared/infrastructure/persistence/ORMs/Request";
 
 import { RegisterAggregate, TeamAggregate, RequestAggregate } from "./aggregate";
 import { RequestState, RequestStateCode, RequestStateString } from "./value-objects/RequestState";

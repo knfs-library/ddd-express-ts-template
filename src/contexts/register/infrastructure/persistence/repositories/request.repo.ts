@@ -1,15 +1,15 @@
-import { Repository } from '../../../../../shared/infrastructure/persistence/repository.abs';
+import { Repository } from '@/shared/infrastructure/persistence/repository.abs';
 
-import sequelize from '../../../../../shared/kernel/database';
-import { Factory } from '../../../domain/factory';
-import { Request as RequestORM } from '../../../../../shared/infrastructure/persistence/ORMs/Request';
-import { Team } from '../../../domain/entities/Team';
-import { Register } from '../../../domain/entities/Register';
-import { Request } from '../../../domain/entities/Request';
-import { MemberTeamAssoc } from '../../../../../shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
+import sequelize from '@/shared/kernel/database';
+import { Factory } from '@/contexts/register/domain/factory';
+import { Request as RequestORM } from '@/shared/infrastructure/persistence/ORMs/Request';
+import { Team } from '@/contexts/register/domain/entities/Team';
+import { Register } from '@/contexts/register/domain/entities/Register';
+import { Request } from '@/contexts/register/domain/entities/Request';
+import { MemberTeamAssoc } from '@/shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
 import { UUID } from 'crypto';
-import IRequestRepository from '../../../domain/repositories/request.repo.itf';
-import { RequestAggregate } from '../../../domain/aggregate';
+import IRequestRepository from '@/contexts/register/domain/repositories/request.repo.itf';
+import { RequestAggregate } from '@/contexts/register/domain/aggregate';
 class RequestRepository extends Repository<RequestORM> implements IRequestRepository {
 	protected _accentor = sequelize.getRepository(RequestORM)
 	protected _factory = Factory;
@@ -45,6 +45,7 @@ class RequestRepository extends Repository<RequestORM> implements IRequestReposi
 		if (null === request) {
 			return null
 		}
+
 		const memberCount = await sequelize.getRepository(MemberTeamAssoc).count({
 			where: {
 				teamId: request.team.id

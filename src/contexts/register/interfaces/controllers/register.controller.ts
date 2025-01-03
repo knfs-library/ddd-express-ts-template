@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import registerToJoinTeamUc from '../use-cases/registerToJoinTeam.uc';
-import approveRegisterToJoinTeamUc from '../use-cases/approveRegisterToJoinTeam.uc';
+import registerToJoinTeamUc from '@/contexts/register/application/use-cases/registerToJoinTeam.uc';
+import approveRegisterToJoinTeamUc from '@/contexts/register/application/use-cases/approveRegisterToJoinTeam.uc';
 
 
 const registerToTeam = async (req: Request, res: Response) => {

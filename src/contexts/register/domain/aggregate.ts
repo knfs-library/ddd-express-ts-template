@@ -84,9 +84,6 @@ class RegisterAggregate extends Register {
 	}
 }
 
-
-
-
 export {
 	RequestAggregate,
 	TeamAggregate,

@@ -1,7 +1,7 @@
-import RegisterService from "../../domain/services/register.service";
-import RegisterRepository from "../../infrastructure/persistence/repositories/register.repo";
-import TeamRepository from "../../infrastructure/persistence/repositories/team.repo";
-import RequestRepository from "../../infrastructure/persistence/repositories/request.repo";
+import RegisterService from "@/contexts/register/domain/services/register.service";
+import RegisterRepository from "@/contexts/register/infrastructure/persistence/repositories/register.repo";
+import TeamRepository from "@/contexts/register/infrastructure/persistence/repositories/team.repo";
+import RequestRepository from "@/contexts/register/infrastructure/persistence/repositories/request.repo";
 import { UUID } from "crypto";
 
 const registerService = new RegisterService(

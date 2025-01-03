@@ -12,5 +12,17 @@
 		"checkJs": true,
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
-	}
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [
+				"src/*"
+			],
+			"@/shared": [
+				"src/shared/*"
+			],
+			"@/contexts": [
+				"src/contexts/*"
+			]
+		}
+	},
 }

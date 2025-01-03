@@ -29,7 +29,7 @@ sh entrypoint.sh
 ### Start app
 ```bash
 # Run on Dev Env
-yarn star
+yarn start
 
 ```
 - In browser, access `http://localhost:${APP_PORT}/`
@@ -58,13 +58,14 @@ yarn test
 │   ├── ├── ├── ├── services  # Are Domain Services
 │   ├── ├── ├── ├── aggregate.ts  # Are aggregate groups that group entities and value objects together
 │   ├── ├── ├── ├── factory.ts  # Where entities, value objects, aggregates are initialized
-│   ├── ├── ├── infrastructure # Infrastructure Layer: Contains detailed implementations, adapters, etc.
+│   ├── ├── ├── infrastructure # Infrastructure Layer: Contains detailed 
+implementations, adapters, etc.
+│   ├── ├── ├── ├── http # handle request, response from # http / grpc / cli
+│   ├── ├── ├── ├── ├── routes # ExpressJs route, use it as route of module 
 │   ├── ├── ├── ├── persistence 
 │   ├── ├── ├── ├── ├── repositories
-├── ├── ├── ├── interfaces # http / grpc / cli / soat / GUI (ejs),
+├── ├── ├── ├── interfaces # json / soat / GUI (ejs),
 │   ├── ├── ├── ├── controllers # handle request, response from 
-│   ├── ├── ├── ├── http # handle request, response from 
-│   ├── ├── ├── ├── ├── routes # ExpressJs route, use it as route of module 
 │   └── shared         # Shared Layer: Contains shared components, config, helpers, etc.
 │       ├── config
 │       ├── domain     #
@@ -72,15 +73,16 @@ yarn test
 │       ├── ├── entity.abs.ts     # Abstract of entity
 │       ├── ├── event.abs.ts     # Abstract of event
 │       ├── ├── factory.itf.ts # Interface of Factory    
-│       ├── infrastructure # Infrastructure Layer: Contains detailed implementations, adapters, etc.
+│       ├── infrastructure # Infrastructure Layer: Contains detailed implementations, 
+adapters, etc.
+│       ├── ├── http
+│       ├── ├── ├── routes # ExpressJs route, use for app
+│       └── ├── ├── middleware
 │       ├── ├── persistence 
 │       ├── ├── ├── migrations 
 │       ├── ├── ├── ORMs 
 │       ├── ├── ├── seeders 
-│       ├── interface
-│       ├── ├── http
-│       ├── ├── ├── routes # ExpressJs route, use for app
-│       └── ├── ├── middleware
+│       ├── interface # Response (Web UI, JSON API, SOAT API)
 │       ├── kernel 
 │       ├── utils 
 ├── tests              # Directory containing test files

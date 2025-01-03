@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { registerToTeam, approveRegisterToTeam } from '../../controllers/register.controller'
-
+import { registerToTeam, approveRegisterToTeam } from '@/contexts/register/interfaces/controllers/register.controller'
 const router = Router();
 
 router.post('/', registerToTeam);

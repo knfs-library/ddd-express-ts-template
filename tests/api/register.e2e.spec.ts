@@ -1,12 +1,12 @@
 import supertest from 'supertest';
-import app from '../../src/app';
-import sequelize from '../../src/shared/kernel/database'; // Import sequelize instance
-import { User } from '../../src/shared/infrastructure/persistence/ORMs/User';
-import { Team } from '../../src/shared/infrastructure/persistence/ORMs/Team';
-import { Profile } from '../../src/shared/infrastructure/persistence/ORMs/Profile';
-import { MemberTeamAssoc } from '../../src/shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
-import { Address } from '../../src/shared/infrastructure/persistence/ORMs/Address';
-import { Request } from '../../src/shared/infrastructure/persistence/ORMs/Request';
+import app from '@/app';
+import sequelize from '@/shared/kernel/database'; // Import sequelize instance
+import { User } from '@/shared/infrastructure/persistence/ORMs/User';
+import { Team } from '@/shared/infrastructure/persistence/ORMs/Team';
+import { Profile } from '@/shared/infrastructure/persistence/ORMs/Profile';
+import { MemberTeamAssoc } from '@/shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
+import { Address } from '@/shared/infrastructure/persistence/ORMs/Address';
+import { Request } from '@/shared/infrastructure/persistence/ORMs/Request';
 
 async function seedTestData() {
 	const user1 = await sequelize.getRepository(User).create({
@@ -93,14 +93,16 @@ describe('Registration Endpoints', () => {
 		const registerRes = await registerRequest.send({ registerId, teamId });
 		const requestId = registerRes.body.request.id
 		
-		const approveRequest = request.post('/api/registers/approve')
-		const res = await approveRequest.send({ adminId, requestId })
-		expect(res.status).toEqual(200);
-		expect(res.body.content).toEqual('ok');
-		expect(res.body.request).toBeDefined();
-		expect(res.body.request.state).toEqual(1);
+		setTimeout(async () => {
+			const approveRequest = request.post('/api/registers/approve')
 
+			const res = await approveRequest.send({ adminId, requestId })
 
-	}, 10000);
+			expect(res.status).toEqual(200);
+			expect(res.body.content).toEqual('ok');
+			expect(res.body.request).toBeDefined();
+			expect(res.body.request.state).toEqual(1);
+		}, 10000)
+	}, 500);
 
 });

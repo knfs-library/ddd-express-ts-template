@@ -1,12 +1,12 @@
-import { Team as TeamORM } from '../../../../../shared/infrastructure/persistence/ORMs/Team';
-import { MemberTeamAssoc } from '../../../../../shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
-import { Repository } from '../../../../../shared/infrastructure/persistence/repository.abs';
+import { Team as TeamORM } from '@/shared/infrastructure/persistence/ORMs/Team';
+import { MemberTeamAssoc } from '@/shared/infrastructure/persistence/ORMs/MemberTeamAssoc';
+import { Repository } from '@/shared/infrastructure/persistence/repository.abs';
 
-import sequelize from '../../../../../shared/kernel/database';
-import { Factory } from '../../../domain/factory';
+import sequelize from '@/shared/kernel/database';
+import { Factory } from '@/contexts/register/domain/factory';
 import { UUID } from 'crypto';
-import ITeamRepository from '../../../domain/repositories/team.repo.itf';
-import { TeamAggregate } from '../../../domain/aggregate';
+import ITeamRepository from '@/contexts/register/domain/repositories/team.repo.itf';
+import { TeamAggregate } from '@/contexts/register/domain/aggregate';
 class TeamRepository extends Repository<TeamORM> implements ITeamRepository {
 	protected _accentor = sequelize.getRepository(TeamORM);
 	protected _factory = Factory;

@@ -1,4 +1,4 @@
-import { AdminApproveRequestMessage } from "../../domain/events/AdminApprovedRequest.event";
+import { AdminApproveRequestMessage } from "@/contexts/register/domain/events/AdminApprovedRequest.event";
 
 export function notifyApprovedRequestJoinTeam(msg: AdminApproveRequestMessage) {
 	console.log("------------approve successful-------------------")
